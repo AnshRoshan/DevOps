@@ -4,7 +4,7 @@ pipeline{
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         region = "ap-south-1"
-        cluster_name = "eks-cluster"
+        cluster_name = "my-cluster"
     }
     stages{
         stage("checkout SCM"){
