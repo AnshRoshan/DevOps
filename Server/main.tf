@@ -75,8 +75,9 @@ module "security_group" {
 
 # creating the ec2 instance
 module "ec2_instance" {
+
   source = "terraform-aws-modules/ec2-instance/aws"
-  ami    = data.aws_ami.amzn2_latest.id # "ami-0c55b159cbfafe1f0"
+  ami    = var.ami
   name   = "Jenkins-Server"
 
   instance_type               = var.instance_type
@@ -96,6 +97,6 @@ module "ec2_instance" {
 }
 
 # resource "aws_instance" "example" {
-#   ami           = "ami-0c55b159cbfafe1f0"
+#   ami           = "ami-02a2af70a66af6dfb"
 #   instance_type = "t2.micro"
 # }

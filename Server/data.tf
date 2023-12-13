@@ -1,12 +1,7 @@
-data "aws_ami" "amzn2_latest" {
+data "aws_ami" "amzn_latest" {
 
   owners      = ["amazon"]
   most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm*"]
-  }
 
   filter {
     name   = "root-device-type"

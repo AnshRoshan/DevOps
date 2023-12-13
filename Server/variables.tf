@@ -19,3 +19,8 @@ variable "key_name" {
   description = "The key name to use for the instance"
   type        = string
 }
+
+variable "ami" {
+  description = "The AMI to use for the instance"
+  type        = string
+}
