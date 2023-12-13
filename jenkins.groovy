@@ -1,20 +1,10 @@
-# DevOps
-
-DevOps configuration files, scripts
-EKS,GKE,AKS-kubernetes cluster creation tools
-Terraform-Infrastucture as a code
-jenkins- CI/CD
-Docker-Containerization
-Ansible-Configuration management
-Packer-Image creation
-
-
 pipeline{
     agent any
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         region = "ap-south-1"
+        cluster_name = "eks-cluster"
     }
     stages{
         stage("checkout SCM"){
@@ -66,6 +56,17 @@ pipeline{
                 script{
                     dir("EKS"){
                         sh "terraform $action --auto-approve "
+                    }
+                }
+            }
+        }
+        stage("Deploy Ngix"){
+            steps{
+                script{
+                    dir("EKS/config"){
+                        sh "aws eks update-kubeconfig --name $cluster_name --region $region"
+                        sh "kubectl apply -f deployment.yaml"
+                        sh "kubectl apply -f service.yaml"
                     }
                 }
             }
